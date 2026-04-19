@@ -1,2 +1,3 @@
 # java_base_demoqa_tests
 Hello, people!
+Hello, world!
