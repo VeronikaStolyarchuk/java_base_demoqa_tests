@@ -17,6 +17,7 @@ public class BaseTest {
         Configuration.timeout = 10000; //default=4000
     }
 
+
     @AfterEach
     void afterEach() {
         closeWebDriver();
