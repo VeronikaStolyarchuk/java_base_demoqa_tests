@@ -1,15 +1,6 @@
-
 package tests;
 
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import tests.BaseTest;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,7 +10,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class PracticeFormTest extends BaseTest {
 
     @Test
-    void SuccessfulTest_TextBoxForm(){
+    void successfulTextBoxForm(){
         open("/text-box");
         $("[id=userName]").setValue("Alex Black");
         $("[id=userEmail]").setValue("alex@black.com");
@@ -35,7 +26,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void NegativeTest_InvalidEmailTextBoxForm(){
+    void invalidEmailTextBoxForm(){
         open("/text-box");
         $("[id=userName]").setValue("Alex Black");
         $("[id=userEmail]").setValue("alex.com");
@@ -47,7 +38,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void SuccessfulTest_PracticeForm(){
+    void successfulPracticeForm(){
         open("/automation-practice-form");
         $("[id=firstName]").setValue("Vera");
         $("[id=lastName]").setValue("Ivanova");
@@ -86,7 +77,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void SuccessfulTest_RequiredFields(){
+    void successfulRequiredFields(){
         open("/automation-practice-form");
         $("[id=firstName]").setValue("Vera");
         $("[id=lastName]").setValue("Ivanova");
@@ -104,7 +95,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void NegativeTest_InvalidEmail(){
+    void invalidEmailPracticeForm(){
         open("/automation-practice-form");
         $("[id=firstName]").setValue("Vera");
         $("[id=lastName]").setValue("Ivanova");
@@ -116,7 +107,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void NegativeTest_InvalidPhone(){
+    void invalidPhonePracticeForm(){
         open("/automation-practice-form");
         $("[id=firstName]").setValue("Vera");
         $("[id=lastName]").setValue("Ivanova");
@@ -128,7 +119,7 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
-    void NegativeTest_EmptyGender(){
+    void emptyGenderPracticeForm(){
         open("/automation-practice-form");
         $("[id=firstName]").setValue("Vera");
         $("[id=lastName]").setValue("Ivanova");
