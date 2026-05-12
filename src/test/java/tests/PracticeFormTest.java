@@ -6,32 +6,33 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static testData.testData.*;
 
 public class PracticeFormTest extends BaseTest {
 
     @Test
     void successfulTextBoxForm(){
         open("/text-box");
-        $("[id=userName]").setValue("Alex Black");
-        $("[id=userEmail]").setValue("alex@black.com");
-        $("[id=currentAddress]").setValue("first address 1");
-        $("[id=permanentAddress]").setValue("second address 2");
+        $("[id=userName]").setValue(userName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("[id=currentAddress]").setValue(currentAddress);
+        $("[id=permanentAddress]").setValue(permanentAddress);
         $("[id=submit]").click();
 
-        $("[id=output] [id=name]").shouldHave(text("Alex Black"));
-        $("[id=output] [id=email]").shouldHave(text("alex@black.com"));
-        $("[id=output] [id=currentAddress]").shouldHave(text("first address 1"));
-        $("[id=output] [id=permanentAddress]").shouldHave(text("second address 2"));
+        $("[id=output] [id=name]").shouldHave(text(userName));
+        $("[id=output] [id=email]").shouldHave(text(userEmail));
+        $("[id=output] [id=currentAddress]").shouldHave(text(currentAddress));
+        $("[id=output] [id=permanentAddress]").shouldHave(text(permanentAddress));
 
     }
 
     @Test
     void invalidEmailTextBoxForm(){
         open("/text-box");
-        $("[id=userName]").setValue("Alex Black");
+        $("[id=userName]").setValue(userName);
         $("[id=userEmail]").setValue("alex.com");
-        $("[id=currentAddress]").setValue("first address 1");
-        $("[id=permanentAddress]").setValue("second address 2");
+        $("[id=currentAddress]").setValue(currentAddress);
+        $("[id=permanentAddress]").setValue(permanentAddress);
         $("[id=submit]").click();
 
         $("#output").shouldNotBe(visible);
@@ -40,38 +41,38 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Vera");
-        $("[id=lastName]").setValue("Ivanova");
-        $("[id=userEmail]").setValue("1111@mail.ru");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("[id=userNumber]").setValue("9175642132");
+        $("[id=firstName]").setValue(userFirstName);
+        $("[id=lastName]").setValue(userLastName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("#genterWrapper").$(byText(userGender)).click();
+        $("[id=userNumber]").setValue(phoneNumber);
         $("#dateOfBirth-wrapper").click();
-        $(".react-datepicker__month-select").selectOption("June");
-        $(".react-datepicker__year-select").selectOption("2000");
+        $(".react-datepicker__month-select").selectOption(monthBirth);
+        $(".react-datepicker__year-select").selectOption(yearBirth);
         $(".react-datepicker__day--004").click();
-        $("[id=subjectsInput]").setValue("Maths").pressEnter();
-        $("[id=hobbiesWrapper]").$(byText("Music")).click();
-        $("[id=uploadPicture]").uploadFromClasspath("image.jpg");
+        $("[id=subjectsInput]").setValue(subject).pressEnter();
+        $("[id=hobbiesWrapper]").$(byText(hobby)).click();
+        $("[id=uploadPicture]").uploadFromClasspath(picture);
         executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=currentAddress]").setValue("Moscow 111");
+        $("[id=currentAddress]").setValue(currentAddress);
         $("#state").click();
-        $("#state").$(byText("Haryana")).click();
+        $("#state").$(byText(state)).click();
         $("#city").click();
-        $("#city").$(byText("Karnal")).click();
+        $("#city").$(byText(city)).click();
         $("#submit").click();
 
         $(".modal-content").shouldBe(visible);
 
-        $(".modal-body").shouldHave(text("Vera Ivanova"));
-        $(".modal-body").shouldHave(text("1111@mail.ru"));
-        $(".modal-body").shouldHave(text("Female"));
-        $(".modal-body").shouldHave(text("9175642132"));
-        $(".modal-body").shouldHave(text("04 June,2000"));
-        $(".modal-body").shouldHave(text("Maths"));
-        $(".modal-body").shouldHave(text("Music"));
-        $(".modal-body").shouldHave(text("image.jpg"));
-        $(".modal-body").shouldHave(text("Moscow 111"));
-        $(".modal-body").shouldHave(text("Haryana Karnal"));
+        $(".modal-body").shouldHave(text(userFirstName + " " + userLastName));
+        $(".modal-body").shouldHave(text(userEmail));
+        $(".modal-body").shouldHave(text(userGender));
+        $(".modal-body").shouldHave(text(phoneNumber));
+        $(".modal-body").shouldHave(text(dayBirth + " " + monthBirth + "," + yearBirth));
+        $(".modal-body").shouldHave(text(subject));
+        $(".modal-body").shouldHave(text(hobby));
+        $(".modal-body").shouldHave(text(picture));
+        $(".modal-body").shouldHave(text(currentAddress));
+        $(".modal-body").shouldHave(text(state + " " + city));
 
 
     }
@@ -79,29 +80,29 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulRequiredFields(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Vera");
-        $("[id=lastName]").setValue("Ivanova");
-        $("#genterWrapper").$(byText("Female")).click();
+        $("[id=firstName]").setValue(userFirstName);
+        $("[id=lastName]").setValue(userLastName);
+        $("#genterWrapper").$(byText(userGender)).click();
         executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=userNumber]").setValue("9175642132");
+        $("[id=userNumber]").setValue(phoneNumber);
         $("#submit").click();
 
         $(".modal-content").shouldBe(visible);
 
-        $(".modal-body").shouldHave(text("Vera Ivanova"));
-        $(".modal-body").shouldHave(text("Female"));
-        $(".modal-body").shouldHave(text("9175642132"));
+        $(".modal-body").shouldHave(text(userFirstName + " " + userLastName));
+        $(".modal-body").shouldHave(text(userGender));
+        $(".modal-body").shouldHave(text(phoneNumber));
 
     }
 
     @Test
     void invalidEmailPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Vera");
-        $("[id=lastName]").setValue("Ivanova");
+        $("[id=firstName]").setValue(userFirstName);
+        $("[id=lastName]").setValue(userLastName);
         $("[id=userEmail]").setValue("1111.ru");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("[id=userNumber]").setValue("9175642132");
+        $("#genterWrapper").$(byText(userGender)).click();
+        $("[id=userNumber]").setValue(phoneNumber);
 
         $(".modal-content").shouldNotBe(visible);
     }
@@ -109,10 +110,10 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidPhonePracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Vera");
-        $("[id=lastName]").setValue("Ivanova");
-        $("[id=userEmail]").setValue("1111@mail.ru");
-        $("#genterWrapper").$(byText("Female")).click();
+        $("[id=firstName]").setValue(userFirstName);
+        $("[id=lastName]").setValue(userLastName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("#genterWrapper").$(byText(userGender)).click();
         $("[id=userNumber]").setValue("asdfghjklz");
 
         $(".modal-content").shouldNotBe(visible);
@@ -121,9 +122,9 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void emptyGenderPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Vera");
-        $("[id=lastName]").setValue("Ivanova");
-        $("[id=userNumber]").setValue("9175642132");
+        $("[id=firstName]").setValue(userFirstName);
+        $("[id=lastName]").setValue(userLastName);
+        $("[id=userNumber]").setValue(phoneNumber);
 
         $(".modal-content").shouldNotBe(visible);
     }
