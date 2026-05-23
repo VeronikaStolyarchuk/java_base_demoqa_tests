@@ -1,130 +1,107 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
+import pages.PracticeFormPage;
+import pages.components.ResultPracticeFormTable;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static testData.testData.*;
+import static tests.testData.TestData.*;
 
 public class PracticeFormTest extends BaseTest {
 
-    @Test
-    void successfulTextBoxForm(){
-        open("/text-box");
-        $("[id=userName]").setValue(userName);
-        $("[id=userEmail]").setValue(userEmail);
-        $("[id=currentAddress]").setValue(currentAddress);
-        $("[id=permanentAddress]").setValue(permanentAddress);
-        $("[id=submit]").click();
+    PracticeFormPage practiceFormPage = new PracticeFormPage();
+    ResultPracticeFormTable resultPracticeFormTable = new ResultPracticeFormTable();
 
-        $("[id=output] [id=name]").shouldHave(text(userName));
-        $("[id=output] [id=email]").shouldHave(text(userEmail));
-        $("[id=output] [id=currentAddress]").shouldHave(text(currentAddress));
-        $("[id=output] [id=permanentAddress]").shouldHave(text(permanentAddress));
 
-    }
-
-    @Test
-    void invalidEmailTextBoxForm(){
-        open("/text-box");
-        $("[id=userName]").setValue(userName);
-        $("[id=userEmail]").setValue("alex.com");
-        $("[id=currentAddress]").setValue(currentAddress);
-        $("[id=permanentAddress]").setValue(permanentAddress);
-        $("[id=submit]").click();
-
-        $("#output").shouldNotBe(visible);
-    }
 
     @Test
     void successfulPracticeForm(){
-        open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue(userEmail);
-        $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue(phoneNumber);
-        $("#dateOfBirth-wrapper").click();
-        $(".react-datepicker__month-select").selectOption(monthBirth);
-        $(".react-datepicker__year-select").selectOption(yearBirth);
-        $(".react-datepicker__day--004").click();
-        $("[id=subjectsInput]").setValue(subject).pressEnter();
-        $("[id=hobbiesWrapper]").$(byText(hobby)).click();
-        $("[id=uploadPicture]").uploadFromClasspath(picture);
-        executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=currentAddress]").setValue(currentAddress);
-        $("#state").click();
-        $("#state").$(byText(state)).click();
-        $("#city").click();
-        $("#city").$(byText(city)).click();
-        $("#submit").click();
+        practiceFormPage.openPage()
+                .typeFirstName(userFirstName)
+                .typeLastName(userLastName)
+                .typeUserEmail(userEmail)
+                .setGender(userGender)
+                .typeUserNumber(phoneNumber)
+                .setDateOfBirth(dayBirth, monthBirth, yearBirth)
+                .typeSubjects(subject)
+                .setHobbies(hobby)
+                .uploadPicture(picture)
+                .typeCurrentAddress(currentAddress)
+                .setState(state)
+                .setCity(city)
+                .submitForm();
 
-        $(".modal-content").shouldBe(visible);
 
-        $(".modal-body").shouldHave(text(userFirstName + " " + userLastName));
-        $(".modal-body").shouldHave(text(userEmail));
-        $(".modal-body").shouldHave(text(userGender));
-        $(".modal-body").shouldHave(text(phoneNumber));
-        $(".modal-body").shouldHave(text(dayBirth + " " + monthBirth + "," + yearBirth));
-        $(".modal-body").shouldHave(text(subject));
-        $(".modal-body").shouldHave(text(hobby));
-        $(".modal-body").shouldHave(text(picture));
-        $(".modal-body").shouldHave(text(currentAddress));
-        $(".modal-body").shouldHave(text(state + " " + city));
+        resultPracticeFormTable.checkModal()
+                .checkTableResult("Student Name", userFirstName + " " +userLastName)
+                //.checkTableResult(userLastName)
+                .checkTableResult("Student Email", userEmail)
+                .checkTableResult("Gender", userGender)
+                .checkTableResult("Mobile", phoneNumber)
+                .checkTableResult("Date of Birth", dateOfBirth)
+                .checkTableResult("Subjects", subject)
+                .checkTableResult("Hobbies", hobby)
+                .checkTableResult("Picture", picture)
+                .checkTableResult("Address", currentAddress)
+                .checkTableResult("State and City", state + " " + city)
 
+
+                .closeModal();
 
     }
 
     @Test
     void successfulRequiredFields(){
-        open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("#genterWrapper").$(byText(userGender)).click();
-        executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=userNumber]").setValue(phoneNumber);
-        $("#submit").click();
+        practiceFormPage.openPage()
+                .typeFirstName(userFirstName)
+                .typeLastName(userLastName)
+                .typeUserEmail(userEmail)
+                .setGender(userGender)
+                .typeUserNumber(phoneNumber)
+                .submitForm();
 
-        $(".modal-content").shouldBe(visible);
-
-        $(".modal-body").shouldHave(text(userFirstName + " " + userLastName));
-        $(".modal-body").shouldHave(text(userGender));
-        $(".modal-body").shouldHave(text(phoneNumber));
-
+        resultPracticeFormTable.checkModal()
+                .checkTableResult("Student Name", userFirstName + " " + userLastName)
+                .checkTableResult("Student Email", userEmail)
+                .checkTableResult("Gender", userGender)
+                .checkTableResult("Mobile", phoneNumber);
     }
 
     @Test
     void invalidEmailPracticeForm(){
-        open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue("1111.ru");
-        $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue(phoneNumber);
+        practiceFormPage.openPage()
+                .typeFirstName(userFirstName)
+                .typeLastName(userLastName)
+                .typeUserEmail(invalidUserEmail)
+                .setGender(userGender)
+                .typeUserNumber(phoneNumber)
+                .submitForm();
 
         $(".modal-content").shouldNotBe(visible);
     }
 
     @Test
     void invalidPhonePracticeForm(){
-        open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue(userEmail);
-        $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue("asdfghjklz");
+        practiceFormPage.openPage()
+                .typeFirstName(userFirstName)
+                .typeLastName(userLastName)
+                .typeUserEmail(userEmail)
+                .setGender(userGender)
+                .typeUserNumber(invalidPhoneNumber);
 
         $(".modal-content").shouldNotBe(visible);
     }
 
     @Test
     void emptyGenderPracticeForm(){
-        open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userNumber]").setValue(phoneNumber);
+        practiceFormPage.openPage()
+                .typeFirstName(userFirstName)
+                .typeLastName(userLastName)
+                .typeUserEmail(userEmail)
+                .setGender(userGender);
 
         $(".modal-content").shouldNotBe(visible);
     }

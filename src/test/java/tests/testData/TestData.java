@@ -1,6 +1,7 @@
-package testData;
+package tests.testData;
 
-public class testData {
+public class TestData {
+
     public static String userName = "Alex Black";
     public static String userEmail = "alex@black.com";
     public static String currentAddress = "first address 1";
@@ -12,9 +13,12 @@ public class testData {
     public static String dayBirth = "04";
     public static String monthBirth = "June";
     public static String yearBirth = "2000";
+    public static String dateOfBirth = "04 June,2000";
     public static String subject = "Maths";
     public static String hobby = "Music";
     public static String picture = "image.jpg";
     public static String state = "Haryana";
     public static String city = "Karnal";
+    public static String invalidUserEmail = "123.123";
+    public static String invalidPhoneNumber = "hvghmdjytdj";
 }
