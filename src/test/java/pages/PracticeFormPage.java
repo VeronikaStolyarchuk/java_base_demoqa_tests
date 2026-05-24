@@ -6,8 +6,7 @@ import pages.components.CalendarComponent;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage {
 
@@ -28,10 +27,10 @@ public class PracticeFormPage {
     private SelenideElement citySelect = $("#city");
     private SelenideElement cityWrapper= $("#stateCity-wrapper");
     private SelenideElement submitButton = $("#submit");
-
-
+    private SelenideElement modalContent = $(".modal-content");
 
     public PracticeFormPage openPage(){
+
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
@@ -113,13 +112,6 @@ public class PracticeFormPage {
         return this;
     }
 
-    //public PracticeFormPage setStateAndCity(String state, String city){
-    //   setState(state);
-    //   setCity(city);
-
-    //   return this;
-    //}
-
     public PracticeFormPage submitForm(){
         submitButton.click();
 
@@ -127,7 +119,13 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage submitFormNotVisible(){
-        submitButton.shouldNotBe(visible);
+        modalContent.shouldNotBe(visible);
+
+        return this;
+    }
+
+    public PracticeFormPage scrollMethod(){
+        executeJavaScript("window.scrollBy(0, 500)");
 
         return this;
     }

@@ -10,14 +10,13 @@ public class ResultTextBoxForm {
 
     private final SelenideElement checkResult = $("#output");
 
-
     public ResultTextBoxForm checkTexBoxResult(String value) {
         checkResult.shouldHave(text(value));
 
         return this;
     }
 
-    public ResultTextBoxForm checkTexBoxNotResult(String value) {
+    public ResultTextBoxForm checkTexBoxNotResult() {
         checkResult.shouldNotBe(visible);
 
         return this;

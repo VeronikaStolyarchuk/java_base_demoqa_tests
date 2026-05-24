@@ -3,11 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultPracticeFormTable;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static tests.testData.TestData.*;
 
 public class PracticeFormTest extends BaseTest {
@@ -15,11 +10,11 @@ public class PracticeFormTest extends BaseTest {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     ResultPracticeFormTable resultPracticeFormTable = new ResultPracticeFormTable();
 
-
-
     @Test
     void successfulPracticeForm(){
-        practiceFormPage.openPage()
+
+        practiceFormPage
+                .openPage()
                 .typeFirstName(userFirstName)
                 .typeLastName(userLastName)
                 .typeUserEmail(userEmail)
@@ -34,10 +29,9 @@ public class PracticeFormTest extends BaseTest {
                 .setCity(city)
                 .submitForm();
 
-
-        resultPracticeFormTable.checkModal()
+        resultPracticeFormTable
+                .checkModal()
                 .checkTableResult("Student Name", userFirstName + " " +userLastName)
-                //.checkTableResult(userLastName)
                 .checkTableResult("Student Email", userEmail)
                 .checkTableResult("Gender", userGender)
                 .checkTableResult("Mobile", phoneNumber)
@@ -48,22 +42,25 @@ public class PracticeFormTest extends BaseTest {
                 .checkTableResult("Address", currentAddress)
                 .checkTableResult("State and City", state + " " + city)
 
-
                 .closeModal();
 
     }
 
     @Test
     void successfulRequiredFields(){
-        practiceFormPage.openPage()
+
+        practiceFormPage
+                .openPage()
                 .typeFirstName(userFirstName)
                 .typeLastName(userLastName)
                 .typeUserEmail(userEmail)
                 .setGender(userGender)
+                .scrollMethod()
                 .typeUserNumber(phoneNumber)
                 .submitForm();
 
-        resultPracticeFormTable.checkModal()
+        resultPracticeFormTable
+                .checkModal()
                 .checkTableResult("Student Name", userFirstName + " " + userLastName)
                 .checkTableResult("Student Email", userEmail)
                 .checkTableResult("Gender", userGender)
@@ -72,41 +69,45 @@ public class PracticeFormTest extends BaseTest {
 
     @Test
     void invalidEmailPracticeForm(){
-        practiceFormPage.openPage()
+
+        practiceFormPage
+                .openPage()
                 .typeFirstName(userFirstName)
                 .typeLastName(userLastName)
                 .typeUserEmail(invalidUserEmail)
                 .setGender(userGender)
+                .scrollMethod()
                 .typeUserNumber(phoneNumber)
-                .submitForm();
+                .submitForm()
 
-        $(".modal-content").shouldNotBe(visible);
+                .submitFormNotVisible();
     }
 
     @Test
     void invalidPhonePracticeForm(){
-        practiceFormPage.openPage()
+
+        practiceFormPage
+                .openPage()
                 .typeFirstName(userFirstName)
                 .typeLastName(userLastName)
                 .typeUserEmail(userEmail)
                 .setGender(userGender)
-                .typeUserNumber(invalidPhoneNumber);
+                .typeUserNumber(invalidPhoneNumber)
 
-        $(".modal-content").shouldNotBe(visible);
+                .submitFormNotVisible();
     }
 
     @Test
     void emptyGenderPracticeForm(){
-        practiceFormPage.openPage()
+
+        practiceFormPage
+                .openPage()
                 .typeFirstName(userFirstName)
                 .typeLastName(userLastName)
                 .typeUserEmail(userEmail)
-                .setGender(userGender);
+                .setGender(userGender)
 
-        $(".modal-content").shouldNotBe(visible);
+                .submitFormNotVisible();
     }
-
-
-
 
 }
