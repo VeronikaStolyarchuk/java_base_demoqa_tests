@@ -25,10 +25,10 @@ public class ResultPracticeFormTable {
         return this;
     }
 
-    public ResultPracticeFormTable closeModal(){
+    public void closeModal(){
+
         closeModal.click();
 
-        return this;
     }
 
 }

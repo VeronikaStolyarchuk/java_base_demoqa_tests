@@ -8,11 +8,11 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxPage {
 
-    private SelenideElement userNameInput = $("#userName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement permanentAddressInput = $("#permanentAddress");
-    private SelenideElement submitButton = $("#submit");
+    private final SelenideElement userNameInput = $("#userName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement permanentAddressInput = $("#permanentAddress");
+    private final SelenideElement submitButton = $("#submit");
 
     public TextBoxPage openTextBoxPage(){
         open("/text-box");
@@ -45,10 +45,9 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage submitForm(){
+    public void submitForm(){
         submitButton.click();
 
-        return this;
     }
 
 }

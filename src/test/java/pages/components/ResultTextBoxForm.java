@@ -16,10 +16,10 @@ public class ResultTextBoxForm {
         return this;
     }
 
-    public ResultTextBoxForm checkTexBoxNotResult() {
+    public void checkTexBoxNotResult() {
+
         checkResult.shouldNotBe(visible);
 
-        return this;
     }
 
 }

@@ -12,22 +12,22 @@ public class PracticeFormPage {
 
     CalendarComponent calendar = new CalendarComponent();
 
-    private SelenideElement firstNameInput = $("#firstName");
-    private SelenideElement lastNameInput = $("#lastName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement genderContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("#userNumber");
-    private SelenideElement dateOfBirth = $("#dateOfBirthInput");
-    private SelenideElement subjectsInput = $("#subjectsInput");
-    private SelenideElement hobbiesContainer = $("#hobbiesWrapper");
-    private SelenideElement pictureLabel = $("#uploadPicture");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement stateSelect = $("#state");
-    private SelenideElement stateWrapper= $("#stateCity-wrapper");
-    private SelenideElement citySelect = $("#city");
-    private SelenideElement cityWrapper= $("#stateCity-wrapper");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement modalContent = $(".modal-content");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement genderContainer = $("#genterWrapper");
+    private final SelenideElement userNumberInput = $("#userNumber");
+    private final SelenideElement dateOfBirth = $("#dateOfBirthInput");
+    private final SelenideElement subjectsInput = $("#subjectsInput");
+    private final SelenideElement hobbiesContainer = $("#hobbiesWrapper");
+    private final SelenideElement pictureLabel = $("#uploadPicture");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement stateSelect = $("#state");
+    private final SelenideElement stateWrapper= $("#stateCity-wrapper");
+    private final SelenideElement citySelect = $("#city");
+    private final SelenideElement cityWrapper= $("#stateCity-wrapper");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement modalContent = $(".modal-content");
 
     public PracticeFormPage openPage(){
 
@@ -118,10 +118,9 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage submitFormNotVisible(){
+    public void submitFormNotVisible(){
         modalContent.shouldNotBe(visible);
 
-        return this;
     }
 
     public PracticeFormPage scrollMethod(){
