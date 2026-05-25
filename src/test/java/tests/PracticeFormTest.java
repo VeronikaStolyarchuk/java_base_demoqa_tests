@@ -13,11 +13,11 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulTextBoxForm(){
         open("/text-box");
-        $("[id=userName]").setValue(userName);
-        $("[id=userEmail]").setValue(userEmail);
-        $("[id=currentAddress]").setValue(currentAddress);
-        $("[id=permanentAddress]").setValue(permanentAddress);
-        $("[id=submit]").click();
+        $("#userName").setValue(userName);
+        $("#userEmail").setValue(userEmail);
+        $("#currentAddress").setValue(currentAddress);
+        $("#permanentAddress").setValue(permanentAddress);
+        $("#submit").click();
 
         $("[id=output] [id=name]").shouldHave(text(userName));
         $("[id=output] [id=email]").shouldHave(text(userEmail));
@@ -29,11 +29,11 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidEmailTextBoxForm(){
         open("/text-box");
-        $("[id=userName]").setValue(userName);
-        $("[id=userEmail]").setValue("alex.com");
-        $("[id=currentAddress]").setValue(currentAddress);
-        $("[id=permanentAddress]").setValue(permanentAddress);
-        $("[id=submit]").click();
+        $("#userName").setValue(userName);
+        $("#userEmail").setValue("alex.com");
+        $("#currentAddress").setValue(currentAddress);
+        $("#permanentAddress").setValue(permanentAddress);
+        $("#submit").click();
 
         $("#output").shouldNotBe(visible);
     }
@@ -41,20 +41,20 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue(userEmail);
+        $("#firstName").setValue(userFirstName);
+        $("#lastName").setValue(userLastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue(phoneNumber);
+        $("#userNumber").setValue(phoneNumber);
         $("#dateOfBirth-wrapper").click();
         $(".react-datepicker__month-select").selectOption(monthBirth);
         $(".react-datepicker__year-select").selectOption(yearBirth);
         $(".react-datepicker__day--004").click();
-        $("[id=subjectsInput]").setValue(subject).pressEnter();
-        $("[id=hobbiesWrapper]").$(byText(hobby)).click();
-        $("[id=uploadPicture]").uploadFromClasspath(picture);
+        $("#subjectsInput").setValue(subject).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobby)).click();
+        $("#uploadPicture").uploadFromClasspath(picture);
         executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=currentAddress]").setValue(currentAddress);
+        $("#currentAddress").setValue(currentAddress);
         $("#state").click();
         $("#state").$(byText(state)).click();
         $("#city").click();
@@ -80,11 +80,11 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulRequiredFields(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
+        $("#firstName").setValue(userFirstName);
+        $("#lastName").setValue(userLastName);
         $("#genterWrapper").$(byText(userGender)).click();
         executeJavaScript("window.scrollBy(0, 500)");
-        $("[id=userNumber]").setValue(phoneNumber);
+        $("#userNumber").setValue(phoneNumber);
         $("#submit").click();
 
         $(".modal-content").shouldBe(visible);
@@ -98,11 +98,11 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidEmailPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue("1111.ru");
+        $("#firstName").setValue(userFirstName);
+        $("#lastName").setValue(userLastName);
+        $("#userEmail").setValue("1111.ru");
         $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue(phoneNumber);
+        $("#userNumber").setValue(phoneNumber);
 
         $(".modal-content").shouldNotBe(visible);
     }
@@ -110,11 +110,11 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidPhonePracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userEmail]").setValue(userEmail);
+        $("#firstName").setValue(userFirstName);
+        $("#lastName").setValue(userLastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText(userGender)).click();
-        $("[id=userNumber]").setValue("asdfghjklz");
+        $("#userNumber").setValue("asdfghjklz");
 
         $(".modal-content").shouldNotBe(visible);
     }
@@ -122,9 +122,9 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void emptyGenderPracticeForm(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue(userFirstName);
-        $("[id=lastName]").setValue(userLastName);
-        $("[id=userNumber]").setValue(phoneNumber);
+        $("#firstName").setValue(userFirstName);
+        $("#lastName").setValue(userLastName);
+        $("#userNumber").setValue(phoneNumber);
 
         $(".modal-content").shouldNotBe(visible);
     }
