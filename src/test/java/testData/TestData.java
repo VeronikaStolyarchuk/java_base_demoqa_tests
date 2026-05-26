@@ -1,6 +1,6 @@
 package testData;
 
-public class testData {
+public class TestData {
     public static String userName = "Alex Black";
     public static String userEmail = "alex@black.com";
     public static String currentAddress = "first address 1";
