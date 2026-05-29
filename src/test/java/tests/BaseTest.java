@@ -18,7 +18,6 @@ public class BaseTest {
 
     @AfterEach
     void afterEach() {
-
         closeWebDriver();
     }
 }
