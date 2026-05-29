@@ -1,6 +1,8 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
+import utils.JsSnippets;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -18,10 +20,10 @@ public class PracticeFormTest extends BaseTest {
         $("#permanentAddress").setValue(permanentAddress);
         $("#submit").click();
 
-        $("#output #name").parent().shouldHave(text(userName));
-        $("#output #email").parent().shouldHave(text(userEmail));
-        $("#output #currentAddress").parent().shouldHave(text(currentAddress));
-        $("#output #permanentAddress").parent().shouldHave(text(permanentAddress));
+        $("#output #name").shouldHave(text(userName));
+        $("#output #email").shouldHave(text(userEmail));
+        $("#output #currentAddress").shouldHave(text(currentAddress));
+        $("#output #permanentAddress").shouldHave(text(permanentAddress));
 
     }
 
@@ -41,6 +43,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulPracticeForm(){
         open("/automation-practice-form");
+        JsSnippets.removeBanner();
         $("#firstName").setValue(userFirstName);
         $("#lastName").setValue(userLastName);
         $("#userEmail").setValue(userEmail);
@@ -79,6 +82,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void successfulRequiredFields(){
         open("/automation-practice-form");
+        JsSnippets.removeBanner();
         $("#firstName").setValue(userFirstName);
         $("#lastName").setValue(userLastName);
         $("#genterWrapper").$(byText(userGender)).click();
@@ -97,6 +101,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidEmailPracticeForm(){
         open("/automation-practice-form");
+        JsSnippets.removeBanner();
         $("#firstName").setValue(userFirstName);
         $("#lastName").setValue(userLastName);
         $("#userEmail").setValue("1111.ru");
@@ -109,6 +114,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void invalidPhonePracticeForm(){
         open("/automation-practice-form");
+        JsSnippets.removeBanner();
         $("#firstName").setValue(userFirstName);
         $("#lastName").setValue(userLastName);
         $("#userEmail").setValue(userEmail);
@@ -122,6 +128,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void emptyGenderPracticeForm(){
         open("/automation-practice-form");
+        JsSnippets.removeBanner();
         $("#firstName").setValue(userFirstName);
         $("#lastName").setValue(userLastName);
         $("#userNumber").setValue(phoneNumber);
