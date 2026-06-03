@@ -2,12 +2,10 @@ package pages.components;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ResultPracticeFormTable {
-
 
     private final SelenideElement openModal = $(".modal-dialog");
     private final SelenideElement modalBody = $(".modal-body");
@@ -26,9 +24,7 @@ public class ResultPracticeFormTable {
     }
 
     public void closeModal(){
-
         closeModal.click();
-
     }
 
 }

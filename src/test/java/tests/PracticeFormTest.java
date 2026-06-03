@@ -3,7 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultPracticeFormTable;
-import static tests.testData.TestData.*;
 
 public class PracticeFormTest extends BaseTest {
 
@@ -15,32 +14,33 @@ public class PracticeFormTest extends BaseTest {
 
         practiceFormPage
                 .openPage()
-                .typeFirstName(userFirstName)
-                .typeLastName(userLastName)
-                .typeUserEmail(userEmail)
-                .setGender(userGender)
-                .typeUserNumber(phoneNumber)
-                .setDateOfBirth(dayBirth, monthBirth, yearBirth)
-                .typeSubjects(subject)
-                .setHobbies(hobby)
-                .uploadPicture(picture)
-                .typeCurrentAddress(currentAddress)
-                .setState(state)
-                .setCity(city)
+                .typeFirstName(testData.userFirstName)
+                .typeLastName(testData.userLastName)
+                .typeUserEmail(testData.userCorrectEmail)
+                .setGender(testData.userGender)
+                .scrollMethod()
+                .typeUserNumber(testData.phoneNumber)
+                .setDateOfBirth(testData.monthBirth, testData.yearBirth, testData.dayBirth)
+                .typeSubjects(testData.subject)
+                .setHobbies(testData.hobby)
+                .uploadPicture(testData.picture)
+                .typeCurrentAddress(testData.currentAddressField)
+                .setState(testData.state)
+                .setCity(testData.city)
                 .submitForm();
 
         resultPracticeFormTable
                 .checkModal()
-                .checkTableResult("Student Name", userFirstName + " " +userLastName)
-                .checkTableResult("Student Email", userEmail)
-                .checkTableResult("Gender", userGender)
-                .checkTableResult("Mobile", phoneNumber)
-                .checkTableResult("Date of Birth", dateOfBirth)
-                .checkTableResult("Subjects", subject)
-                .checkTableResult("Hobbies", hobby)
-                .checkTableResult("Picture", picture)
-                .checkTableResult("Address", currentAddress)
-                .checkTableResult("State and City", state + " " + city)
+                .checkTableResult("Student Name", testData.userFirstName + " " +testData.userLastName)
+                .checkTableResult("Student Email", testData.userCorrectEmail)
+                .checkTableResult("Gender", testData.userGender)
+                .checkTableResult("Mobile", testData.phoneNumber)
+                .checkTableResult("Date of Birth", testData.dateOfBirth)
+                .checkTableResult("Subjects", testData.subject)
+                .checkTableResult("Hobbies", testData.hobby)
+                .checkTableResult("Picture", testData.picture)
+                .checkTableResult("Address", testData.currentAddressField)
+                .checkTableResult("State and City", testData.state + " " + testData.city)
 
                 .closeModal();
 
@@ -51,20 +51,20 @@ public class PracticeFormTest extends BaseTest {
 
         practiceFormPage
                 .openPage()
-                .typeFirstName(userFirstName)
-                .typeLastName(userLastName)
-                .typeUserEmail(userEmail)
-                .setGender(userGender)
+                .typeFirstName(testData.userFirstName)
+                .typeLastName(testData.userLastName)
+                .typeUserEmail(testData.userCorrectEmail)
+                .setGender(testData.userGender)
                 .scrollMethod()
-                .typeUserNumber(phoneNumber)
+                .typeUserNumber(testData.phoneNumber)
                 .submitForm();
 
         resultPracticeFormTable
                 .checkModal()
-                .checkTableResult("Student Name", userFirstName + " " + userLastName)
-                .checkTableResult("Student Email", userEmail)
-                .checkTableResult("Gender", userGender)
-                .checkTableResult("Mobile", phoneNumber);
+                .checkTableResult("Student Name", testData.userFirstName + " " + testData.userLastName)
+                .checkTableResult("Student Email", testData.userCorrectEmail)
+                .checkTableResult("Gender", testData.userGender)
+                .checkTableResult("Mobile", testData.phoneNumber);
     }
 
     @Test
@@ -72,12 +72,12 @@ public class PracticeFormTest extends BaseTest {
 
         practiceFormPage
                 .openPage()
-                .typeFirstName(userFirstName)
-                .typeLastName(userLastName)
-                .typeUserEmail(invalidUserEmail)
-                .setGender(userGender)
+                .typeFirstName(testData.userFirstName)
+                .typeLastName(testData.userLastName)
+                .typeUserEmail(testData.invalidUserEmail)
+                .setGender(testData.userGender)
                 .scrollMethod()
-                .typeUserNumber(phoneNumber)
+                .typeUserNumber(testData.phoneNumber)
                 .submitForm()
 
                 .submitFormNotVisible();
@@ -88,11 +88,11 @@ public class PracticeFormTest extends BaseTest {
 
         practiceFormPage
                 .openPage()
-                .typeFirstName(userFirstName)
-                .typeLastName(userLastName)
-                .typeUserEmail(userEmail)
-                .setGender(userGender)
-                .typeUserNumber(invalidPhoneNumber)
+                .typeFirstName(testData.userFirstName)
+                .typeLastName(testData.userLastName)
+                .typeUserEmail(testData.userCorrectEmail)
+                .setGender(testData.userGender)
+                .typeUserNumber(testData.invalidPhoneNumber)
 
                 .submitFormNotVisible();
     }
@@ -102,10 +102,10 @@ public class PracticeFormTest extends BaseTest {
 
         practiceFormPage
                 .openPage()
-                .typeFirstName(userFirstName)
-                .typeLastName(userLastName)
-                .typeUserEmail(userEmail)
-                .setGender(userGender)
+                .typeFirstName(testData.userFirstName)
+                .typeLastName(testData.userLastName)
+                .typeUserEmail(testData.userCorrectEmail)
+                .setGender(testData.userGender)
 
                 .submitFormNotVisible();
     }

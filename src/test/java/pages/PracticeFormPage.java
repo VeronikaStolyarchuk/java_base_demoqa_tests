@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import utils.JsSnippets;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -69,9 +68,9 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage setDateOfBirth(String day, String month, String year){
+    public PracticeFormPage setDateOfBirth(String month, String year, String day){
         dateOfBirth.click();
-        calendar.setDate(day, month, year);
+        calendar.setDate(month, year, day);
 
         return this;
     }

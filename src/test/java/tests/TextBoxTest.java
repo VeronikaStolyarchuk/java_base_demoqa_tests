@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 import pages.components.ResultTextBoxForm;
 
-import static tests.testData.TestData.*;
-
 public class TextBoxTest extends BaseTest{
 
     TextBoxPage textBoxPage = new TextBoxPage();
@@ -16,17 +14,17 @@ public class TextBoxTest extends BaseTest{
 
         textBoxPage
                 .openTextBoxPage()
-                .typeUserName(userName)
-                .typeUserEmail(userEmail)
-                .typeCurrentAddress(currentAddress)
-                .typePermanentAddress(permanentAddress)
+                .typeUserName(testData.userName)
+                .typeUserEmail(testData.userEmail)
+                .typeCurrentAddress(testData.currentAddress)
+                .typePermanentAddress(testData.permanentAddress)
                 .submitForm();
 
         resultTextBoxForm
-                .checkTexBoxResult(userName)
-                .checkTexBoxResult(userEmail)
-                .checkTexBoxResult(currentAddress)
-                .checkTexBoxResult(permanentAddress);
+                .checkTexBoxResult(testData.userName)
+                .checkTexBoxResult(testData.userEmail)
+                .checkTexBoxResult(testData.currentAddress)
+                .checkTexBoxResult(testData.permanentAddress);
 
     }
 
@@ -35,10 +33,10 @@ public class TextBoxTest extends BaseTest{
 
         textBoxPage
                 .openTextBoxPage()
-                .typeUserName(userName)
-                .typeUserEmail(invalidUserEmail)
-                .typeCurrentAddress(currentAddress)
-                .typePermanentAddress(permanentAddress)
+                .typeUserName(testData.userName)
+                .typeUserEmail(testData.invalidUserEmail)
+                .typeCurrentAddress(testData.currentAddress)
+                .typePermanentAddress(testData.permanentAddress)
                 .submitForm();
 
         resultTextBoxForm.checkTexBoxNotResult();
