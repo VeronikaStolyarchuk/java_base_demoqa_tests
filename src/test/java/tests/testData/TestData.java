@@ -22,7 +22,7 @@ public class TestData {
     public String monthBirth = getRandomMonth();
     public String yearBirth = String.valueOf(getRandomInt(1900, 2100));
     public String dateOfBirth = String.format("%02d", Integer.parseInt(dayBirth)) + " " +
-            monthBirth+ "," + yearBirth;
+            monthBirth + "," + yearBirth;
     public String subject = getRandomSubjects();
     public String hobby = getRandomHobbies();
     public String picture = getRandomPicture();
